@@ -1,28 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
+import IconCard from 'react-native-vector-icons/FontAwesome';
 
 const RegisterUser = () => {
   return (
     <View style={styles.formContainer}>
-        <View>
-            <View >
-            <Text style={styles.titleText}>¡Bienvenido!</Text>
-            </View>
-           
-            <View>
-            <Text style={styles.Text}>Este es tu primer ingreso y para brindarte una mejor experiencia necesitamos tu DNI.</Text>
-            </View>
-        </View>
+      <TouchableOpacity style={styles.backButton}>
+        <Icon name="arrow-back" size={20} color="#000000" style={styles.backButtonIcon} />
+      </TouchableOpacity>
+      <View>
+        <Text style={styles.titleText}>¡Bienvenido!</Text>
+        <Text style={styles.Text}>Este es tu primer ingreso y para brindarte una mejor experiencia necesitamos tu DNI.</Text>
+      </View>
       <View style={styles.inputContainer}>
-        <Icon name="vcard-o" size={20} color="#000000" style={styles.icon} />
+      <IconCard name="vcard-o" size={20} color="#000000" style={styles.icon} />
         <TextInput style={styles.input} placeholder="Ingresa tu DNI" />
       </View>
       <TouchableOpacity style={styles.continueButton}>
         <Text style={styles.continueButtonText}>Continuar</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.backButton}>
-        <Text style={styles.backButtonText}>Volver a la página anterior</Text>
       </TouchableOpacity>
     </View>
   );
@@ -47,18 +43,19 @@ const styles = StyleSheet.create({
     top: 25,
     zIndex: 1,
   },
-  titleText:{
+  titleText: {
     fontSize: 24,
-    fontWeight:700,
-    lineHeight:30,
-    color:'#004489'
+    fontWeight: '700',
+    lineHeight: 30,
+    color: '#004489',
+    marginTop: 20,
+    marginLeft: 30,
   },
-  Text:{
+  Text: {
     fontSize: 16,
-    fontWeight:400,
-    lineHeight:16,
-    color:'#004489'
-
+    fontWeight: '400',
+    lineHeight: 16,
+    color: '#004489',
   },
   input: {
     height: 40,
@@ -66,7 +63,7 @@ const styles = StyleSheet.create({
     borderColor: '#cccccc',
     borderWidth: 1,
     borderRadius: 5,
-    marginTop:15,
+    marginTop: 15,
     marginLeft: 5,
   },
   continueButton: {
@@ -81,12 +78,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   backButton: {
-    paddingVertical: 10,
-    alignItems: 'center',
+    position: 'absolute',
+    top: 20,
+    left: 10,
   },
-  backButtonText: {
-    color: '#0000ff',
-    textDecorationLine: 'underline',
+  backButtonIcon: {
+    marginRight: 5,
   },
 });
 
