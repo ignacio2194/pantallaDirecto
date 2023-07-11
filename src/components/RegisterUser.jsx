@@ -50,6 +50,7 @@ const RegisterUser = () => {
           style={styles.input}
           placeholder="Ingresa tu DNI"
           onChangeText={setData}
+      
         />
       </View>
       <TouchableOpacity
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: "absolute",
-    left: 5,
+    left: 10,
     top: 25,
     zIndex: 1,
   },
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
   },
   Text: {
     fontSize: 16,
+    marginTop:10,
     fontWeight: "400",
     lineHeight: 16,
     color: "#004489",

@@ -1,31 +1,26 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { useNavigation } from "@react-navigation/native";
 const SelectGender = () => {
   const [isMaleSelected, setIsMaleSelected] = useState(false);
   const [isFemaleSelected, setIsFemaleSelected] = useState(false);
-
+  const navigation = useNavigation();
   const handleMaleCheckbox = () => {
-    if (!isMaleSelected) {
-      setIsMaleSelected(true);
-      setIsFemaleSelected(false);
-    } else {
-      setIsMaleSelected(false);
-    }
+    setIsMaleSelected(true);
+    setIsFemaleSelected(false);
   };
 
   const handleFemaleCheckbox = () => {
-    if (!isFemaleSelected) {
-      setIsMaleSelected(false);
-      setIsFemaleSelected(true);
-    } else {
-      setIsFemaleSelected(false);
-    }
+    setIsMaleSelected(false);
+    setIsFemaleSelected(true);
   };
 
   const handleContinue = () => {
-    // Aquí puedes agregar la lógica para manejar el evento del botón "Continuar"
+    if( !isMaleSelected || !isFemaleSelected){
+      navigation.navigate('ValidateIdentity')
+    }
+    console.log("yender a validad identidad")
   };
 
   return (
@@ -61,7 +56,9 @@ const SelectGender = () => {
           >
             <Text style={styles.genderText}>Masculino</Text>
             {isMaleSelected && (
-              <View style={styles.checkboxSelected} />
+              <View style={styles.checkboxSelected}>
+                <Text style={styles.checkboxText}>✓</Text>
+              </View>
             )}
           </TouchableOpacity>
           <TouchableOpacity
@@ -73,7 +70,9 @@ const SelectGender = () => {
           >
             <Text style={styles.genderText}>Femenino</Text>
             {isFemaleSelected && (
-              <View style={styles.checkboxSelected} />
+              <View style={styles.checkboxSelected}>
+                <Text style={styles.checkboxText}>✓</Text>
+              </View>
             )}
           </TouchableOpacity>
         </View>
@@ -85,7 +84,7 @@ const SelectGender = () => {
           onPress={handleContinue}
           disabled={!isMaleSelected && !isFemaleSelected}
         >
-          <Text style={styles.continueButtonText}>Continuar</Text>
+          <Text  disabled={!isMaleSelected && !isFemaleSelected} style={styles.continueButtonText}>Continuar</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -152,32 +151,42 @@ const styles = StyleSheet.create({
     borderColor: "#E8E8E8",
   },
   genderOptionSelected: {
-    // backgroundColor: "#47D14B",
     borderColor: "#47D14B",
   },
   genderText: {
     color: "#000000",
     marginLeft: 10,
+    fontSize: 16,
+    fontWeight: "bold",
+    lineHeight: 16,
+    color: "#004489",
   },
   checkboxSelected: {
-    width: 15,
-    height: 15,
-    backgroundColor: "#ffffff",
-    borderRadius: 3,
-    borderWidth: 2,
-    borderColor: "#47D14B",
+    width: 20,
+    height: 20,
+    backgroundColor: "#abf5ab",
+    borderRadius: 4,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: "auto",
+  },
+  checkboxText: {
+    color: "#1F951F",
+    fontSize: 16,
+    fontWeight: "300",
   },
   continueButton: {
     borderRadius: 20,
     paddingVertical: 10,
     alignItems: "center",
     marginTop: 20,
-    backgroundColor: "#E8E8E8",
+    backgroundColor: "#0069D7",
   },
   continueButtonDisabled: {
     backgroundColor: "#cccccc",
   },
   continueButtonText: {
+  
     color: "#ffffff",
     fontWeight: "bold",
   },
