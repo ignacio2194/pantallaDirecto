@@ -10,6 +10,7 @@ import {
 import IconPhone from "react-native-vector-icons/Feather";
 import IconLocation from "react-native-vector-icons/EvilIcons";
 import { TextInput } from "react-native-gesture-handler";
+
 const ValidateCellPhoneNum = () => {
   return (
     <ImageBackground
@@ -17,7 +18,7 @@ const ValidateCellPhoneNum = () => {
       style={styles.imageBackground}
     >
       <Image source={require("../img/directoImg.png")} style={styles.img} />
-      <View>
+      <View style={styles.container}>
         <View style={styles.formContainer}>
           <TouchableOpacity style={styles.backButton}>
             {/* <Icon
@@ -36,25 +37,43 @@ const ValidateCellPhoneNum = () => {
               financiación que tenemos para vos.
             </Text>
           </View>
-          <View style={styles.genderContainer}>
-            <TextInput     placeholder="ingresa tu ubicacion">
-            
-            </TextInput>
-            <IconLocation    name="location"
-          size={20}
-          color="#000000"
-       />
+          <View style={styles.inputsContainer}>
+          <View style={styles.inputCodNum}>
+          <IconPhone name="phone" size={20} color="#000000" style={styles.PhoneIcon}/>
+            <TextInput
+              style={styles.input}
+              placeholder="Cod de Area"
+            ></TextInput>
           </View>
+          <View style={styles.inputCodNum}>
+            <TextInput
+              style={styles.input}
+              placeholder="N° de celular"
+            ></TextInput>
+      
+          </View>
+          <View style={styles.inputLocation}>
+            <IconLocation name="location" size={20} color="#000000" />
+            <TextInput
+              style={[styles.input, styles.fullWidthInput]}
+              placeholder="Ingresa tu ubicación"
+            ></TextInput>
+          </View>
+          </View>
+       
         </View>
       </View>
     </ImageBackground>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "transparent",
     borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
   },
   imageBackground: {
     flex: 1,
@@ -76,7 +95,6 @@ const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
     height: 477,
-    top: 135,
     borderRadius: 40,
     backgroundColor: "#fff",
     padding: 20,
@@ -96,67 +114,46 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     color: "#004489",
   },
-  genderContainer: {
-    marginTop: 20,
+  inputsContainer:{
+    display:'flex',
+    flexDirection: "row",
+    justifyContent:'center',
+    alignItems:'center',
+    flexWrap:'wrap',
+    width:327,
+    height:136
   },
-  genderOption: {
+  inputCodNum: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "transparent",
-    marginVertical: 5,
-    borderRadius: 40,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderWidth: 2,
-    borderColor: "#E8E8E8",
+    marginTop: 20,
+    width: "50%",
+    textAlign:'justify'
   },
-  genderOptionSelected: {
-    borderColor: "#47D14B",
-  },
-  genderText: {
-    color: "#000000",
-    marginLeft: 10,
-    fontSize: 16,
-    fontWeight: "bold",
-    lineHeight: 16,
-    color: "#004489",
-  },
-  checkboxSelected: {
-    width: 20,
-    height: 20,
-    backgroundColor: "#abf5ab",
-    borderRadius: 4,
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: "auto",
-  },
-  checkboxText: {
-    color: "#1F951F",
-    fontSize: 16,
-    fontWeight: "300",
-  },
-  continueButton: {
-    borderRadius: 20,
-    paddingVertical: 10,
+  inputLocation:{
+    flexDirection: "row",
     alignItems: "center",
     marginTop: 20,
-    backgroundColor: "#0069D7",
+    width: "100%",
   },
-  continueButtonDisabled: {
-    backgroundColor: "#cccccc",
+
+  input: {
+    flex: 1,
+    borderWidth: 2,
+    borderColor: "#E8E8E8",
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 10,
+    marginLeft: 10,
   },
-  continueButtonText: {
-    color: "#ffffff",
-    fontWeight: "bold",
+  PhoneIcon:{
+    position:'absolute',
+    left:15,
+    color:'#656566'
+
   },
-  notMyNameBTN: {
-    textAlign: "center",
-    marginTop: 10,
-    fontWeight: "500",
-    fontSize: 16,
-    lineHeight: 16,
-    color: "#004489",
-    textDecorationLine: "underline",
+  fullWidthInput: {
+    width: "100%",
   },
   backButton: {
     position: "absolute",
