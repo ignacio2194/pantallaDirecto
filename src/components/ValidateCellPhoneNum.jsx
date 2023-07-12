@@ -12,9 +12,9 @@ import IconLocation from "react-native-vector-icons/EvilIcons";
 import { TextInput } from "react-native-gesture-handler";
 
 const ValidateCellPhoneNum = () => {
-  const [areaCode, setAreaCode] = useState("Cod de Area");
-  const [phoneNumber, setPhoneNumber] = useState("Num celular");
-  const [location, setLocation] = useState("ubicacion");
+  const [areaCode, setAreaCode] = useState("Cód. Área");
+  const [phoneNumber, setPhoneNumber] = useState("Nº celular");
+  const [location, setLocation] = useState("Ingresá tu provincia");
   return (
     <ImageBackground
       source={require("../img/bgRn.png")}
@@ -62,7 +62,7 @@ const ValidateCellPhoneNum = () => {
             <View style={styles.inputLocation}>
               <IconLocation
                 name="location"
-                size={20}
+                size={34}
                 color="#000000"
                 style={styles.LocationIcon}
               />
@@ -81,6 +81,10 @@ const ValidateCellPhoneNum = () => {
               de Directo.
             </Text>
           </View>
+          <TouchableOpacity>
+          <Text style={styles.sendBtn}>Enviar</Text>
+          <Text style={styles.backToShop}>Volver a la tienda</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
@@ -164,22 +168,30 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     borderWidth: 2,
-    borderColor: "#E8E8E8",
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderRadius: 10,
     marginLeft: 10,
+    paddingLeft: 50,
+    borderColor: "#cccccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    marginTop: 10,
+    marginLeft: 5,
  
   },
   PhoneIcon: {
     position: "absolute",
+    top:24,
     left: 15,
     color: "#656566",
+  
   },
   LocationIcon: {
     position: "absolute",
-    left: 15,
-    paddingRight:50,
+    top:18,
+    left: 17,
+    paddingRight:5,
     color: "#656566",
   },
   fullWidthInput: {
@@ -195,12 +207,33 @@ const styles = StyleSheet.create({
   },
   termsText: {
     textAlign: "justify",
-    marginTop: 20,
+    marginTop: 50,
   },
   underlineText: {
     color: "#0069D7",
     textDecorationLine: "underline",
   },
+  sendBtn:{
+    borderRadius: 20,
+    paddingVertical: 10,
+    alignItems: "center",
+    marginBottom: 10,
+    marginHorizontal:10,
+    marginVertical:10,
+    color: "#656566",
+    fontWeight: "500",
+    backgroundColor: "#E8E8E8",
+    textAlign:"center"
+  },
+  backToShop:{
+    textAlign:'center',
+    marginTop:10,
+    fontWeight:'500',
+    fontSize:16,
+    lineHeight:16,
+    color:'#004489',
+    textDecorationLine:'underline'
+  }
 });
 
 export default ValidateCellPhoneNum;
