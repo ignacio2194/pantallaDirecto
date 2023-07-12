@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
   StyleSheet,
   Text,
@@ -12,6 +12,9 @@ import IconLocation from "react-native-vector-icons/EvilIcons";
 import { TextInput } from "react-native-gesture-handler";
 
 const ValidateCellPhoneNum = () => {
+  const [areaCode, setAreaCode] = useState("Cod de Area");
+  const [phoneNumber, setPhoneNumber] = useState("Num celular");
+  const [location, setLocation] = useState("ubicacion");
   return (
     <ImageBackground
       source={require("../img/bgRn.png")}
@@ -38,29 +41,46 @@ const ValidateCellPhoneNum = () => {
             </Text>
           </View>
           <View style={styles.inputsContainer}>
-          <View style={styles.inputCodNum}>
-          <IconPhone name="phone" size={20} color="#000000" style={styles.PhoneIcon}/>
-            <TextInput
-              style={styles.input}
-              placeholder="Cod de Area"
-            ></TextInput>
+            <View style={styles.inputCodNum}>
+              <IconPhone
+                name="phone"
+                size={20}
+                color="#000000"
+                style={styles.PhoneIcon}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder={areaCode}
+              ></TextInput>
+            </View>
+            <View style={styles.inputCodNum}>
+              <TextInput
+                style={styles.input}
+                placeholder={phoneNumber}
+              ></TextInput>
+            </View>
+            <View style={styles.inputLocation}>
+              <IconLocation
+                name="location"
+                size={20}
+                color="#000000"
+                style={styles.LocationIcon}
+              />
+              <TextInput
+                style={[styles.input, styles.fullWidthInput]}
+                placeholder={location}
+              ></TextInput>
+            </View>
           </View>
-          <View style={styles.inputCodNum}>
-            <TextInput
-              style={styles.input}
-              placeholder="N° de celular"
-            ></TextInput>
-      
+          <View>
+            <Text style={styles.termsText}>
+              Al continuar declaro que soy mayor de edad y acepto los{" "}
+              <Text style={styles.underlineText}>Términos y condiciones</Text>{" "}
+              y las{" "}
+              <Text style={styles.underlineText}>Políticas de privacidad</Text>{" "}
+              de Directo.
+            </Text>
           </View>
-          <View style={styles.inputLocation}>
-            <IconLocation name="location" size={20} color="#000000" />
-            <TextInput
-              style={[styles.input, styles.fullWidthInput]}
-              placeholder="Ingresa tu ubicación"
-            ></TextInput>
-          </View>
-          </View>
-       
         </View>
       </View>
     </ImageBackground>
@@ -94,7 +114,8 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: "100%",
-    height: 477,
+    height: "100%",
+    top: 135,
     borderRadius: 40,
     backgroundColor: "#fff",
     padding: 20,
@@ -114,29 +135,32 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     color: "#004489",
   },
-  inputsContainer:{
-    display:'flex',
+  inputsContainer: {
+    display: "flex",
     flexDirection: "row",
-    justifyContent:'center',
-    alignItems:'center',
-    flexWrap:'wrap',
-    width:327,
-    height:136
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
+    width: 327,
+    height: 136,
   },
   inputCodNum: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 20,
     width: "50%",
-    textAlign:'justify'
+    textAlign: "center",
   },
-  inputLocation:{
+  inputLocation: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 20,
     width: "100%",
   },
-
+  icon:{
+    marginLeft: 10,
+    padding: 5,
+  },
   input: {
     flex: 1,
     borderWidth: 2,
@@ -145,12 +169,18 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 10,
     marginLeft: 10,
+ 
   },
-  PhoneIcon:{
-    position:'absolute',
-    left:15,
-    color:'#656566'
-
+  PhoneIcon: {
+    position: "absolute",
+    left: 15,
+    color: "#656566",
+  },
+  LocationIcon: {
+    position: "absolute",
+    left: 15,
+    paddingRight:50,
+    color: "#656566",
   },
   fullWidthInput: {
     width: "100%",
@@ -162,6 +192,14 @@ const styles = StyleSheet.create({
   },
   backButtonIcon: {
     marginRight: 5,
+  },
+  termsText: {
+    textAlign: "justify",
+    marginTop: 20,
+  },
+  underlineText: {
+    color: "#0069D7",
+    textDecorationLine: "underline",
   },
 });
 

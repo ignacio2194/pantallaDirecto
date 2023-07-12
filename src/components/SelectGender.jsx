@@ -93,9 +93,10 @@ const SelectGender = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: "transparent",
     borderRadius: 40,
+   
   },
   imageBackground: {
     flex: 1,
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
   },
   img: {
     width: 160,
+
     height: 37,
     position: "absolute",
     top: 84,
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: "100%",
-    height: 477,
+    height:'100%',
     top: 135,
     borderRadius: 40,
     backgroundColor: "#fff",
