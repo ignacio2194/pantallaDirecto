@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,15 +6,66 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  TextInput
 } from "react-native";
 import IconPhone from "react-native-vector-icons/Feather";
 import IconLocation from "react-native-vector-icons/EvilIcons";
-import { TextInput } from "react-native-gesture-handler";
+
+const provinces = [
+  "Buenos Aires",
+  "Córdoba",
+  "Santa Fe",
+  "Mendoza",
+];
 
 const ValidateCellPhoneNum = () => {
-  const [areaCode, setAreaCode] = useState("Cód. Área");
-  const [phoneNumber, setPhoneNumber] = useState("Nº celular");
-  const [location, setLocation] = useState("Ingresá tu provincia");
+  const [areaCode, setAreaCode] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [location, setLocation] = useState("");
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const [provincesFiltered, setProvincesFiltered] = useState([]);
+
+  const handleAreaCodeChange = (text) => {
+    setAreaCode(text);
+    checkButtonState(text, phoneNumber, location);
+  };
+
+  const handlePhoneNumberChange = (text) => {
+    setPhoneNumber(text);
+    checkButtonState(areaCode, text, location);
+  };
+
+  const handleLocationChange = (text) => {
+    setLocation(text);
+    filterProvinces(text);
+    checkButtonState(areaCode, phoneNumber, text);
+  };
+
+  const checkButtonState = (areaCode, phoneNumber, location) => {
+    if (areaCode !== "" && phoneNumber !== "" && location !== "") {
+      setIsButtonEnabled(true);
+    } else {
+      setIsButtonEnabled(false);
+    }
+  };
+
+  const filterProvinces = (text) => {
+    const filtered = provinces.filter((province) =>
+      province.toLowerCase().includes(text.toLowerCase())
+    );
+    setProvincesFiltered(filtered);
+  };
+
+  const handleProvinceSelect = (province) => {
+    setLocation(province);
+    setProvincesFiltered([]);
+  };
+
+  const handleButtonPress = () => {
+    // Aquí puedes realizar la acción cuando se presione el botón
+    console.log("Botón Enviar presionado");
+  };
+
   return (
     <ImageBackground
       source={require("../img/bgRn.png")}
@@ -25,11 +76,11 @@ const ValidateCellPhoneNum = () => {
         <View style={styles.formContainer}>
           <TouchableOpacity style={styles.backButton}>
             {/* <Icon
-            name="arrow-back"
-            size={20}
-            color="#000000"
-            style={styles.backButtonIcon}
-          /> */}
+              name="arrow-back"
+              size={20}
+              color="#000000"
+              style={styles.backButtonIcon}
+            /> */}
           </TouchableOpacity>
           <View>
             <Text style={styles.titleText}>
@@ -50,40 +101,82 @@ const ValidateCellPhoneNum = () => {
               />
               <TextInput
                 style={styles.input}
-                placeholder={areaCode}
-              ></TextInput>
+                placeholder="Cod de Area"
+                value={areaCode}
+                onChangeText={handleAreaCodeChange}
+              />
             </View>
             <View style={styles.inputCodNum}>
               <TextInput
                 style={styles.input}
-                placeholder={phoneNumber}
-              ></TextInput>
+                placeholder="N° de celular"
+                value={phoneNumber}
+                onChangeText={handlePhoneNumberChange}
+              />
+              {/* <IconPhone
+                name="phone"
+                size={20}
+                color="#000000"
+                style={styles.PhoneIcon}
+              /> */}
             </View>
             <View style={styles.inputLocation}>
               <IconLocation
                 name="location"
-                size={34}
+                size={20}
                 color="#000000"
                 style={styles.LocationIcon}
               />
               <TextInput
                 style={[styles.input, styles.fullWidthInput]}
-                placeholder={location}
-              ></TextInput>
+                placeholder="Ingresa tu ubicación"
+                value={location}
+                onChangeText={handleLocationChange}
+              />
+              {provincesFiltered.length > 0 && (
+                <View style={styles.autocompleteContainer}>
+                  {provincesFiltered.map((province) => (
+                    <TouchableOpacity
+                      key={province}
+                      style={[
+                        styles.autocompleteItem,
+                        province === location && styles.selectedProvince
+                      ]}
+                      onPress={() => handleProvinceSelect(province)}
+                    >
+                      <Text
+                        style={[
+                          styles.provinceText,
+                          province === location && styles.selectedProvinceText
+                        ]}
+                      >
+                        {province}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              )}
             </View>
           </View>
-          <View>
+          <View style={styles.termsContainer}>
             <Text style={styles.termsText}>
               Al continuar declaro que soy mayor de edad y acepto los{" "}
-              <Text style={styles.underlineText}>Términos y condiciones</Text>{" "}
-              y las{" "}
-              <Text style={styles.underlineText}>Políticas de privacidad</Text>{" "}
-              de Directo.
+              <Text style={styles.termsLink}>Términos y condiciones</Text> y las{" "}
+              <Text style={styles.termsLink}>Políticas de privacidad</Text> de Directo.
             </Text>
           </View>
-          <TouchableOpacity>
-          <Text style={styles.sendBtn}>Enviar</Text>
-          <Text style={styles.backToShop}>Volver a la tienda</Text>
+          <TouchableOpacity
+            style={[
+              styles.continueButton,
+              isButtonEnabled
+                ? styles.continueButtonEnabled
+                : styles.continueButtonDisabled,
+              { marginTop: 15}
+            ]}
+            onPress={handleButtonPress}
+            disabled={!isButtonEnabled}
+          >
+            <Text style={styles.continueButtonText}>Enviar</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -153,45 +246,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
     width: "50%",
-    textAlign: "center",
+    textAlign: "justify",
   },
   inputLocation: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 20,
     width: "100%",
-  },
-  icon:{
-    marginLeft: 10,
-    padding: 5,
+    position: "relative",
   },
   input: {
     flex: 1,
     borderWidth: 2,
+    borderColor: "#E8E8E8",
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderRadius: 10,
     marginLeft: 10,
-    paddingLeft: 50,
-    borderColor: "#cccccc",
-    borderWidth: 1,
-    borderRadius: 5,
-    marginTop: 10,
-    marginLeft: 5,
- 
+    paddingLeft: 30,
   },
   PhoneIcon: {
     position: "absolute",
-    top:24,
     left: 15,
     color: "#656566",
-  
   },
   LocationIcon: {
     position: "absolute",
-    top:18,
-    left: 17,
-    paddingRight:5,
+    left: 15,
     color: "#656566",
   },
   fullWidthInput: {
@@ -205,35 +286,65 @@ const styles = StyleSheet.create({
   backButtonIcon: {
     marginRight: 5,
   },
-  termsText: {
-    textAlign: "justify",
-    marginTop: 50,
-  },
-  underlineText: {
-    color: "#0069D7",
-    textDecorationLine: "underline",
-  },
-  sendBtn:{
+  continueButton: {
     borderRadius: 20,
     paddingVertical: 10,
     alignItems: "center",
     marginBottom: 10,
-    marginHorizontal:10,
-    marginVertical:10,
-    color: "#656566",
-    fontWeight: "500",
     backgroundColor: "#E8E8E8",
-    textAlign:"center"
   },
-  backToShop:{
-    textAlign:'center',
-    marginTop:10,
-    fontWeight:'500',
-    fontSize:16,
-    lineHeight:16,
-    color:'#004489',
-    textDecorationLine:'underline'
-  }
+  continueButtonEnabled: {
+    backgroundColor: "#0069D7",
+  },
+  continueButtonDisabled: {
+    backgroundColor: "#E8E8E8",
+  },
+  continueButtonText: {
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
+  termsContainer: {
+    marginTop: 20,
+    alignItems: "center",
+  },
+  termsText: {
+    textAlign: "justify",
+    fontSize: 12,
+    lineHeight: 16,
+    marginTop:100,
+    color: "#004489",
+  },
+  termsLink: {
+    color: "#0069D7",
+    textDecorationLine: "underline",
+  },
+  autocompleteContainer: {
+    position: "absolute",
+    top: 40,
+    left: 0,
+    right: 0,
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#E8E8E8",
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    zIndex: 1,
+  },
+  autocompleteItem: {
+    paddingVertical: 5,
+  },
+  provinceText: {
+    fontSize: 16,
+    lineHeight: 24,
+    color: "#004489",
+    fontWeight: "400",
+  },
+  selectedProvince: {
+    backgroundColor: "#E8E8E8",
+  },
+  selectedProvinceText: {
+    color: "#ffffff",
+  },
 });
 
 export default ValidateCellPhoneNum;
