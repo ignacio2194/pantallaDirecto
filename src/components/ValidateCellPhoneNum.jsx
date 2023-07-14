@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import IconPhone from "react-native-vector-icons/Feather";
 import IconLocation from "react-native-vector-icons/EvilIcons";
-
+import { useNavigation } from "@react-navigation/native";
 const provinces = [
   "Buenos Aires",
   "Córdoba",
@@ -24,7 +24,7 @@ const ValidateCellPhoneNum = () => {
   const [location, setLocation] = useState("");
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
   const [provincesFiltered, setProvincesFiltered] = useState([]);
-
+  const navigation = useNavigation();
   const handleAreaCodeChange = (text) => {
     setAreaCode(text);
     checkButtonState(text, phoneNumber, location);
@@ -62,8 +62,11 @@ const ValidateCellPhoneNum = () => {
   };
 
   const handleButtonPress = () => {
-    // Aquí puedes realizar la acción cuando se presione el botón
-    console.log("Botón Enviar presionado");
+   if (areaCode !== "" && phoneNumber !== "" && location !== "") {
+    navigation.navigate('ValidateNumSms')
+    } else {
+      console.log("datos erroneos")
+    }
   };
 
   return (
