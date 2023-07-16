@@ -1,39 +1,42 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons'; // Importamos el icono de Ionicons
 import { useNavigation } from "@react-navigation/native";
+
 const ValidateIdentity = () => {
   const [userFound, setUserFound] = useState('Juan Pablo Gónzalez');
   const [isUserSelected, setIsUserSelected] = useState(false);
   const navigation = useNavigation();
 
   const handleSelectUser = () => {
-    setIsUserSelected(true);
+    setIsUserSelected(!isUserSelected); // Cambiamos el estado al hacer clic
   };
-  const handleContinue=()=>{
-    navigation.navigate('ValidateCellPhoneNum')
-  }
+
+  const handleContinue = () => {
+    if (isUserSelected) {
+      navigation.navigate('ValidateCellPhoneNum');
+    }
+  };
 
   return (
-    
+    <ImageBackground
+      source={require("../img/bgRn.png")}
+      style={styles.imageBackground}
+    >
+      <Image
+        source={require("../img/directoImg.png")}
+        style={styles.img}
+      />
       <View style={styles.container}>
-        <ImageBackground
-          source={require("../img/bgRn.png")}
-          style={styles.imageBackground}
-        >
-          <Image
-            source={require("../img/directoImg.png")}
-            style={styles.img}
-          />
-        </ImageBackground>
-        <View style={styles.formContainer}>
-          <TouchableOpacity style={styles.backButton}>
-            {/* <Icon
+        <TouchableOpacity style={styles.backButton}>
+          {/* <Icon
             name="arrow-back"
             size={20}
             color="#000000"
-            style={styles.backButtonIcon}
+            style={ {marginTop:5, padding:5}}
           /> */}
-          </TouchableOpacity>
+        </TouchableOpacity>
+        <View style={styles.formContainer}>
           <View>
             <Text style={styles.titleText}>Validemos tu identidad</Text>
             <Text style={styles.Text}>
@@ -50,10 +53,12 @@ const ValidateIdentity = () => {
               onPress={handleSelectUser}
             >
               <Text style={styles.genderText}>{userFound}</Text>
-              {isUserSelected && (
+              {isUserSelected ? (
                 <View style={styles.checkboxSelected}>
-                  <Text style={styles.checkboxText}>✓</Text>
+                  <Icon name="checkmark-sharp" size={16} color="#47D14B" />
                 </View>
+              ) : (
+                <View style={styles.checkboxEmpty}></View>
               )}
             </TouchableOpacity>
           </View>
@@ -72,40 +77,36 @@ const ValidateIdentity = () => {
           </TouchableOpacity>
         </View>
       </View>
-   
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "transparent",
+    height:'100%',
+    width:'100%',
+    top:65,
+    backgroundColor: "#fff",
     borderRadius: 40,
+    padding:10,
   },
   imageBackground: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
+    borderRadius: 40,
+ 
   },
   img: {
     width: 160,
     height: 37,
     position: "absolute",
-    top: 84,
+    top: 20,
     left: 16,
   },
   formContainer: {
-    width: "100%",
-    height:'100%',
-    top: 135,
-    borderRadius: 40,
-    backgroundColor: "#fff",
-    padding: 20,
+    flex: 1,
+
   },
   titleText: {
     fontSize: 24,
@@ -113,26 +114,29 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     color: "#004489",
     marginTop: 20,
-    marginLeft: 30,
+    marginLeft: 20,
   },
   Text: {
     fontSize: 16,
     fontWeight: "400",
+    padding:20,
+    textAlign:'left',
     marginTop: 10,
-    lineHeight: 16,
+    lineHeight: 24,
     color: "#004489",
   },
   genderContainer: {
-    marginTop: 20,
+    marginTop: 5,
   },
   genderOption: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "transparent",
     marginVertical: 5,
-    borderRadius: 40,
+    marginHorizontal: 15,
+    borderRadius: 15,
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingVertical: 15,
     borderWidth: 2,
     borderColor: "#E8E8E8",
   },
@@ -140,32 +144,38 @@ const styles = StyleSheet.create({
     borderColor: "#47D14B",
   },
   genderText: {
-    color: "#000000",
+    color: "#004489",
     marginLeft: 10,
     fontSize: 16,
     fontWeight: "bold",
     lineHeight: 16,
-    color: "#004489",
   },
   checkboxSelected: {
     width: 20,
     height: 20,
-    backgroundColor: "#abf5ab",
+    backgroundColor: "#C8F8C8",
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",
     marginLeft: "auto",
   },
-  checkboxText: {
-    color: "#1F951F",
-    fontSize: 16,
-    fontWeight: "300",
+  checkboxIcon: {
+    width: 20,
+    height: 20,
+  },
+  checkboxEmpty: {
+    width: 20,
+    height: 20,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "#E8E8E8",
+    marginLeft: "auto",
   },
   continueButton: {
     borderRadius: 20,
     paddingVertical: 10,
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 275,
     backgroundColor: "#0069D7",
   },
   continueButtonDisabled: {
@@ -174,25 +184,17 @@ const styles = StyleSheet.create({
   continueButtonText: {
     color: "#ffffff",
     fontWeight: "bold",
-  },
-  notMyNameBTN:{
-    textAlign:'center',
-    marginTop:10,
-    fontWeight:'500',
-    fontSize:16,
-    lineHeight:16,
-    color:'#004489',
-    textDecorationLine:'underline'
-
+    padding:5
     
   },
-  backButton: {
-    position: "absolute",
-    top: 20,
-    left: 10,
-  },
-  backButtonIcon: {
-    marginRight: 5,
+  notMyNameBTN: {
+    textAlign: "center",
+    marginTop: 10,
+    fontWeight: "500",
+    fontSize: 16,
+    lineHeight: 16,
+    color: "#004489",
+    textDecorationLine: "underline",
   },
 });
 

@@ -5,15 +5,12 @@ import 'react-native-gesture-handler';
 
 const Home = () => {
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../img/bgRn.png")}
-        style={styles.imageBackground}
-      >
+    <ImageBackground  source={require("../img/bgRn.png")}
+    style={styles.imageBackground}>
         <Image source={require("../img/directoImg.png")} style={styles.img}  />
-      </ImageBackground>
+  
       <RegisterUser/>
-  </View>
+  </ImageBackground>
   )
 }
 const styles = StyleSheet.create({
@@ -22,9 +19,9 @@ const styles = StyleSheet.create({
       backgroundColor: '#00FFED',
     },
     imageBackground: {
-      // flex: 1,
-      // resizeMode: 'cover',
-      // justifyContent: 'center',
+      flex: 1,
+      resizeMode: 'cover',
+      justifyContent: 'center',
       flex: 1,
       resizeMode: "cover",
       justifyContent: "center",
@@ -38,7 +35,7 @@ const styles = StyleSheet.create({
       width: 160,
     height: 37,
     position: "absolute",
-    top: 84,
+    top: 20,
     left: 16,
     },
   });
