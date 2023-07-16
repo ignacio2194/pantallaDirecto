@@ -1,44 +1,38 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,ImageBackground,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from "@react-navigation/native";
+
 const SelectGender = () => {
   const [isMaleSelected, setIsMaleSelected] = useState(false);
   const [isFemaleSelected, setIsFemaleSelected] = useState(false);
   const navigation = useNavigation();
+
   const handleMaleCheckbox = () => {
-    setIsMaleSelected(true);
+    setIsMaleSelected(!isMaleSelected);
     setIsFemaleSelected(false);
   };
 
   const handleFemaleCheckbox = () => {
     setIsMaleSelected(false);
-    setIsFemaleSelected(true);
+    setIsFemaleSelected(!isFemaleSelected);
   };
 
   const handleContinue = () => {
-    if( !isMaleSelected || !isFemaleSelected){
-      navigation.navigate('ValidateIdentity')
+    console.log(isMaleSelected)
+    if (!isMaleSelected || !isFemaleSelected) {
+      navigation.navigate('ValidateIdentity');
     }
-    console.log("yender a validad identidad")
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../img/bgRn.png")}
-        style={styles.imageBackground}
-      >
-        <Image source={require("../img/directoImg.png")} style={styles.img} />
-      </ImageBackground>
-      <View style={styles.formContainer}>
+    <ImageBackground
+    source={require("../img/bgRn.png")}
+    style={styles.imageBackground}>
+    <Image source={require("../img/directoImg.png")} style={styles.img}  />
+      <View style={styles.container}>
         <TouchableOpacity style={styles.backButton}>
-          <Icon
-            name="arrow-back"
-            size={20}
-            color="#000000"
-            style={styles.backButtonIcon}
-          />
+          <Icon name="arrow-back" size={20} color="#000000" style={styles.backButtonIcon} />
         </TouchableOpacity>
         <View>
           <Text style={styles.titleText}>Ingresá tu género</Text>
@@ -54,11 +48,13 @@ const SelectGender = () => {
             ]}
             onPress={handleMaleCheckbox}
           >
-            <Text style={styles.genderText}>Masculino</Text>
-            {isMaleSelected && (
+            <Text style={styles.genderText}>Femenino</Text>
+            {isMaleSelected ? (
               <View style={styles.checkboxSelected}>
-                <Text style={styles.checkboxText}>✓</Text>
+                <Icon name="checkmark-sharp" size={16} color="#47D14B" />
               </View>
+            ) : (
+              <View style={styles.checkboxEmpty}></View>
             )}
           </TouchableOpacity>
           <TouchableOpacity
@@ -68,11 +64,13 @@ const SelectGender = () => {
             ]}
             onPress={handleFemaleCheckbox}
           >
-            <Text style={styles.genderText}>Femenino</Text>
-            {isFemaleSelected && (
+            <Text style={styles.genderText}>Masculino</Text>
+            {isFemaleSelected ? (
               <View style={styles.checkboxSelected}>
-                <Text style={styles.checkboxText}>✓</Text>
+                <Icon name="checkmark-sharp" size={16} color="#47D14B" />
               </View>
+            ) : (
+              <View style={styles.checkboxEmpty}></View>
             )}
           </TouchableOpacity>
         </View>
@@ -84,21 +82,48 @@ const SelectGender = () => {
           onPress={handleContinue}
           disabled={!isMaleSelected && !isFemaleSelected}
         >
-          <Text  disabled={!isMaleSelected && !isFemaleSelected} style={styles.continueButtonText}>Continuar</Text>
+          <Text style={styles.continueButtonText}>Continuar</Text>
         </TouchableOpacity>
+        <Text style={styles.ComeBacktoTheShop}>Volver a la tienda</Text>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
-    backgroundColor: "transparent",
+    backgroundColor: "#ffffff",
+    width: "100%",
+    height: "100%",
+    top: 100,
     borderRadius: 40,
-   
+    backgroundColor: "#fff",
+    padding: 20,
+  },
+  formContainer: {
+    flex: 1,
+    padding: 20,
+  },
+  backButton: {
+    position: "absolute",
+    top: 20,
+    left: 10,
+  },
+  backButtonIcon: {
+    marginRight: 5,
+  },
+  titleText: {
+    fontSize: 24,
+    fontWeight: "700",
+    lineHeight: 30,
+    color: "#004489",
+    marginTop: 20,
+    marginLeft: 30,
   },
   imageBackground: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
@@ -110,30 +135,14 @@ const styles = StyleSheet.create({
   },
   img: {
     width: 160,
-
-    height: 37,
-    position: "absolute",
-    top: 84,
-    left: 16,
-  },
-  formContainer: {
-    width: "100%",
-    height:'100%',
-    top: 135,
-    borderRadius: 40,
-    backgroundColor: "#fff",
-    padding: 20,
-  },
-  titleText: {
-    fontSize: 24,
-    fontWeight: "700",
-    lineHeight: 30,
-    color: "#004489",
-    marginTop: 20,
-    marginLeft: 30,
+  height: 37,
+  position: "absolute",
+  top: 20,
+  left: 16,
   },
   Text: {
     fontSize: 16,
+    marginTop: 10,
     fontWeight: "400",
     lineHeight: 16,
     color: "#004489",
@@ -144,11 +153,11 @@ const styles = StyleSheet.create({
   genderOption: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "transparent",
+    backgroundColor: "#ffffff",
     marginVertical: 5,
-    borderRadius: 40,
+    borderRadius: 15,
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingVertical: 16,
     borderWidth: 2,
     borderColor: "#E8E8E8",
   },
@@ -156,49 +165,49 @@ const styles = StyleSheet.create({
     borderColor: "#47D14B",
   },
   genderText: {
-    color: "#000000",
     marginLeft: 10,
     fontSize: 16,
     fontWeight: "bold",
-    lineHeight: 16,
     color: "#004489",
   },
   checkboxSelected: {
     width: 20,
     height: 20,
-    backgroundColor: "#abf5ab",
+    backgroundColor: "#C8F8C8",
+    color: "#C8F8C8",
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",
     marginLeft: "auto",
   },
-  checkboxText: {
-    color: "#1F951F",
-    fontSize: 16,
-    fontWeight: "300",
+  checkboxEmpty: {
+    width: 20,
+    height: 20,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "#E8E8E8",
+    marginLeft: "auto",
   },
   continueButton: {
     borderRadius: 20,
     paddingVertical: 10,
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 250,
     backgroundColor: "#0069D7",
   },
   continueButtonDisabled: {
     backgroundColor: "#cccccc",
   },
   continueButtonText: {
-  
     color: "#ffffff",
     fontWeight: "bold",
   },
-  backButton: {
-    position: "absolute",
-    top: 20,
-    left: 10,
-  },
-  backButtonIcon: {
-    marginRight: 5,
+  ComeBacktoTheShop: {
+    color: "#004489",
+    textDecorationLine: "underline",
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 15,
   },
 });
 

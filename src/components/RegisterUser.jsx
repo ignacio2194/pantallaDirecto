@@ -9,17 +9,17 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import IconCard from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
+
 const RegisterUser = () => {
   const [data, setData] = useState("");
   const navigation = useNavigation();
-  const handleBtn = () => {
 
+  const handleBtn = () => {
     if (/^\d+$/.test(data) && data.length >= 5) {
       navigation.navigate("SelectGender");
     } else {
       console.log("datos incorrectos");
     }
-    
   };
 
   return (
@@ -50,7 +50,7 @@ const RegisterUser = () => {
           style={styles.input}
           placeholder="Ingresa tu DNI"
           onChangeText={setData}
-      
+          value={data}
         />
       </View>
       <TouchableOpacity
@@ -65,6 +65,7 @@ const RegisterUser = () => {
       >
         <Text style={styles.continueButtonText}>Continuar</Text>
       </TouchableOpacity>
+      <Text style={styles.ComeBacktoTheShop}>Volver a la tienda</Text>
     </View>
   );
 };
@@ -72,9 +73,9 @@ const RegisterUser = () => {
 const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
-    height: 677,
-    top: 135,
-    borderRadius: 10,
+    height: "100%",
+    top: 100,
+    borderRadius: 50,
     backgroundColor: "#ffffff",
     padding: 20,
   },
@@ -85,8 +86,28 @@ const styles = StyleSheet.create({
   icon: {
     position: "absolute",
     left: 10,
-    top: 25,
+    top: 30,
     zIndex: 1,
+  },
+  imageBackground: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  img: {
+    width: 160,
+    height: 37,
+    position: "absolute",
+    top: 20,
+    left: 16,
   },
   titleText: {
     fontSize: 24,
@@ -98,17 +119,17 @@ const styles = StyleSheet.create({
   },
   Text: {
     fontSize: 16,
-    marginTop:10,
+    marginTop: 10,
     fontWeight: "400",
     lineHeight: 16,
     color: "#004489",
   },
   input: {
-    height: 40,
-    paddingLeft: 30,
+    height: 50,
+    paddingLeft: 38,
     borderColor: "#cccccc",
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 15,
     marginTop: 15,
     marginLeft: 5,
   },
@@ -116,17 +137,19 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 10,
     alignItems: "center",
-    marginBottom: 10,
+    marginTop: 300,
   },
   continueButtonEnabled: {
-    backgroundColor: "#0000ff",
+    backgroundColor: "#0069D7",
+    color: "#fff",
   },
   continueButtonDisabled: {
     backgroundColor: "#E8E8E8",
+    color: "#000",
   },
   continueButtonText: {
-    color: "#ffffff",
-    fontWeight: "bold",
+    fontWeight: "500",
+    color: "#fff",
   },
   backButton: {
     position: "absolute",
@@ -135,6 +158,13 @@ const styles = StyleSheet.create({
   },
   backButtonIcon: {
     marginRight: 5,
+  },
+  ComeBacktoTheShop: {
+    color: "#004489",
+    textDecorationLine: "underline",
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 15,
   },
 });
 
