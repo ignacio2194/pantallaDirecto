@@ -135,7 +135,7 @@ const ValidateNumSms = () => {
             </Text>
           </TouchableOpacity>
           <Text style={{  color: "#004489",
-    textDecorationLine: "underline", fontWeight:'bold' , textAlign:'center' ,marginTop:15}}>
+    textDecorationLine: "underline", fontWeight:'bold',fontSize:16 , textAlign:'center' ,marginTop:15}}>
             Volver a la tienda
           </Text>
         </View>
@@ -165,13 +165,13 @@ const styles = StyleSheet.create({
     width: 160,
     height: 37,
     position: "absolute",
-    top: 44,
+    top: 15,
     left: 16,
   },
   formContainer: {
     width: "100%",
     height: "100%",
-    top: 100,
+    top: 70,
     borderRadius: 40,
     backgroundColor: "#fff",
     padding: 20,
@@ -207,9 +207,9 @@ const styles = StyleSheet.create({
   },
   anotherCodeBTn: {
     borderRadius: 20,
-    paddingVertical: 10,
+    paddingVertical: 15,
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 230,
     textAlign: "center",
   },
   anotherCodeBTn_Enabled: {

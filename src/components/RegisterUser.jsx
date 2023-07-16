@@ -25,12 +25,12 @@ const RegisterUser = () => {
   return (
     <View style={styles.formContainer}>
       <TouchableOpacity style={styles.backButton}>
-        <Icon
+        {/* <Icon
           name="arrow-back"
           size={20}
           color="#000000"
           style={styles.backButtonIcon}
-        />
+        /> */}
       </TouchableOpacity>
       <View>
         <Text style={styles.titleText}>¡Bienvenido!</Text>
@@ -74,18 +74,20 @@ const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
     height: "100%",
-    top: 100,
+    top: 70,
+    paddingVertical:35,
     borderRadius: 50,
     backgroundColor: "#ffffff",
     padding: 20,
   },
   inputContainer: {
     position: "relative",
+    marginTop:10,
     marginBottom: 10,
   },
   icon: {
     position: "absolute",
-    left: 10,
+    left: 15,
     top: 30,
     zIndex: 1,
   },
@@ -112,16 +114,16 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 24,
     fontWeight: "700",
+    textAlign:'left',
     lineHeight: 30,
     color: "#004489",
     marginTop: 20,
-    marginLeft: 30,
   },
   Text: {
     fontSize: 16,
     marginTop: 10,
     fontWeight: "400",
-    lineHeight: 16,
+    lineHeight: 24,
     color: "#004489",
   },
   input: {

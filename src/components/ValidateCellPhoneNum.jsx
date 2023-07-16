@@ -90,7 +90,7 @@ const ValidateCellPhoneNum = () => {
               Juan, necesitamos algunos datos para continuar
             </Text>
             <Text style={styles.Text}>
-              Te enviaremos un código por SMS a tu celular para que veas la
+              Te enviaremos un <Text style={{fontWeight:'bold'}}>código por SMS</Text> a tu celular para que veas la
               financiación que tenemos para vos.
             </Text>
           </View>
@@ -181,6 +181,7 @@ const ValidateCellPhoneNum = () => {
           >
             <Text style={styles.continueButtonText}>Enviar</Text>
           </TouchableOpacity>
+          <Text style={styles.ComeBacktoTheShop}>Volver a la tienda</Text>
         </View>
       </View>
     </ImageBackground>
@@ -192,8 +193,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "transparent",
     borderRadius: 40,
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
+    
   },
   imageBackground: {
     flex: 1,
@@ -209,41 +211,45 @@ const styles = StyleSheet.create({
     width: 160,
     height: 37,
     position: "absolute",
-    top: 84,
+    top: 15,
     left: 16,
   },
   formContainer: {
     width: "100%",
     height: "100%",
-    top: 135,
+    top: 70,
     borderRadius: 40,
     backgroundColor: "#fff",
     padding: 20,
+    paddingVertical:50
   },
   titleText: {
     fontSize: 24,
     fontWeight: "700",
     lineHeight: 30,
     color: "#004489",
-    marginTop: 20,
-    marginLeft: 30,
+    marginTop: 0,
+    marginLeft: 0,
   },
   Text: {
     fontSize: 16,
     fontWeight: "400",
     marginTop: 10,
-    lineHeight: 16,
+    paddingRight:30,
+    textAlign:'left',
+    lineHeight: 24,
     color: "#004489",
   },
   inputsContainer: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-start",
     flexWrap: "wrap",
-    width: 327,
+    marginRight:150,
+    width: "100%",
     height: 136,
   },
+  
   inputCodNum: {
     flexDirection: "row",
     alignItems: "center",
@@ -294,6 +300,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: "center",
     marginBottom: 10,
+    paddingVertical:15,
     backgroundColor: "#E8E8E8",
   },
   continueButtonEnabled: {
@@ -314,10 +321,11 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     fontSize: 12,
     lineHeight: 16,
-    marginTop:100,
+    marginTop:90,
     color: "#004489",
   },
   termsLink: {
+    marginTop:50,
     color: "#0069D7",
     textDecorationLine: "underline",
   },
@@ -347,6 +355,13 @@ const styles = StyleSheet.create({
   },
   selectedProvinceText: {
     color: "#ffffff",
+  },
+  ComeBacktoTheShop: {
+    color: "#004489",
+    textDecorationLine: "underline",
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 15,
   },
 });
 

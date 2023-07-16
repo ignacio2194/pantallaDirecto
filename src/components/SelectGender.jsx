@@ -31,9 +31,9 @@ const SelectGender = () => {
     style={styles.imageBackground}>
     <Image source={require("../img/directoImg.png")} style={styles.img}  />
       <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton}>
+        {/* <TouchableOpacity style={styles.backButton}>
           <Icon name="arrow-back" size={20} color="#000000" style={styles.backButtonIcon} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View>
           <Text style={styles.titleText}>Ingresá tu género</Text>
           <Text style={styles.Text}>
@@ -95,10 +95,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     width: "100%",
     height: "100%",
-    top: 100,
+    top: 70,
     borderRadius: 40,
     backgroundColor: "#fff",
     padding: 20,
+    paddingVertical:40
   },
   formContainer: {
     flex: 1,
@@ -115,10 +116,11 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 24,
     fontWeight: "700",
+    textAlign:'left',
     lineHeight: 30,
     color: "#004489",
     marginTop: 20,
-    marginLeft: 30,
+
   },
   imageBackground: {
     flex: 1,
@@ -144,7 +146,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
     fontWeight: "400",
-    lineHeight: 16,
+    textAlign:'left',
+    lineHeight: 24,
     color: "#004489",
   },
   genderContainer: {
@@ -192,7 +195,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 10,
     alignItems: "center",
-    marginTop: 250,
+    marginTop: 220,
+    paddingVertical:15,
     backgroundColor: "#0069D7",
   },
   continueButtonDisabled: {
@@ -206,6 +210,7 @@ const styles = StyleSheet.create({
     color: "#004489",
     textDecorationLine: "underline",
     fontWeight: "bold",
+    lineHeight:24,
     textAlign: "center",
     marginTop: 15,
   },

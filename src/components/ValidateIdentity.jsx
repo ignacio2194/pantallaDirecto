@@ -29,12 +29,12 @@ const ValidateIdentity = () => {
       />
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton}>
-          <Icon
+          {/* <Icon
             name="arrow-back"
             size={20}
             color="#000000"
-            style={ {top:24, left:24}}
-          />
+            style={ {marginTop:5, padding:5}}
+          /> */}
         </TouchableOpacity>
         <View style={styles.formContainer}>
           <View>
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 10,
     alignItems: "center",
-    marginTop: 250,
+    marginTop: 275,
     backgroundColor: "#0069D7",
   },
   continueButtonDisabled: {
